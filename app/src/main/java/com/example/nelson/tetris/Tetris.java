@@ -97,7 +97,7 @@ public class Tetris {
 
 
     protected boolean estanCuadritosVacios(int f1, int c1, int f2, int c2, int f3, int c3, int f4, int c4) {
-        if(f1<14 && f2<14 && f3<14 || f4<14 && c1<10 && c2<10 && c3<10 && c4<10 ){
+        if(f1<14 && f2<14 && f3<14 && f4<14){
             if (matrizTetris[f1][c1] == 0 && matrizTetris[f2][c2] == 0 && matrizTetris[f3][c3] == 0 &&
                     matrizTetris[f4][c4] == 0) {
                 return true;
@@ -166,6 +166,7 @@ public class Tetris {
                 if (estanCuadritosVacios(ocupa_aux[0][0] + 1, ocupa_aux[0][1], ocupa_aux[1][0] + 1, ocupa_aux[1][1], ocupa_aux[2][0] + 1, ocupa_aux[2][1], ocupa_aux[3][0] + 1, ocupa_aux[3][1]) == true){
                     return true;
                 }
+                break;
             case 6:
                 Ele_invertida ele_invertida = (Ele_invertida) figura; //downcast a figura
                 int[][] ocupa_aux6 = ele_invertida.getCuadritosOcupa();

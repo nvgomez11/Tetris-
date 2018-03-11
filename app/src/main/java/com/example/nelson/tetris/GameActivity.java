@@ -18,16 +18,15 @@ public class GameActivity extends AppCompatActivity {
     Tetris tetris = new Tetris();
     final Handler handler = new Handler();
 
-
-    final Ele ele = new Ele(5,"#64DD17",1,0,5,1,5,2,5,2,6);
+    final Palito palito = new Palito(1,"#64DD17",1,0,4,1,4,2,4,3,4);
+    final Ese_invertida ese_invertida = new Ese_invertida(2,"#64DD17",1,0,4,0,5,1,5,1,6);
+    final Ese ese = new Ese(3,"#64DD17",1,0,5,0,4,1,4,1,3);
     final Cuadrado cuadrado = new Cuadrado(4,"#64DD17",1,0,4,0,5,1,4,1,5);
-    final Palito palito = new Palito(4,"#64DD17",1,0,4,1,4,2,4,3,4);
-    final Ese_invertida ese_invertida = new Ese_invertida(4,"#64DD17",1,0,4,0,5,1,5,1,6);
-    final Ele_invertida ele_invertida = new Ele_invertida(4,"#64DD17",1,0,5,1,5,2,5,2,4);
-    final Te te = new Te(4,"#64DD17",1,0,4,0,5,0,6,1,5);
-    final Ese ese = new Ese(4,"#64DD17",1,0,5,0,4,1,4,1,3);
+    final Ele ele = new Ele(5,"#64DD17",1,0,5,1,5,2,5,2,6);
+    final Ele_invertida ele_invertida = new Ele_invertida(6,"#64DD17",1,0,5,1,5,2,5,2,4);
+    final Te te = new Te(7,"#64DD17",1,0,4,0,5,0,6,1,5);
 
-    int randomNum_mueve =4;
+    int randomNum_mueve =(int) (Math.random() * 7) + 1;
 
 
 
@@ -164,7 +163,7 @@ public class GameActivity extends AppCompatActivity {
                 randomNum_mueve =(int) (Math.random() * 7) + 1;
                 final int randomNum = (int) (Math.random() * 7) + 1;
                 Log.d("Numero aleatorioooooo", Integer.toString(randomNum));
-                switch(randomNum){
+                switch(randomNum_mueve){
                     case 1:
                         palito.setCuadritosOcupaEle(0,4,1,4,2,4,3,4);
                         final int matrizPalito_aux[][] = palito.getCuadritosOcupa();
@@ -211,7 +210,7 @@ public class GameActivity extends AppCompatActivity {
                         }
                         break;
                     case 6:
-                        ele_invertida.setCuadritosOcupaEle(0,4,0,5,1,4,1,5);
+                        ele_invertida.setCuadritosOcupaEle(0,4,1,4,2,4,2,3);
                         final int matrizEleInv_aux[][] = ele_invertida.getCuadritosOcupa();
                         if(tetris.estanCuadritosVacios(matrizEleInv_aux[0][0],matrizEleInv_aux[0][1],matrizEleInv_aux[1][0],matrizEleInv_aux[1][1],matrizEleInv_aux[2][0],matrizEleInv_aux[2][1],matrizEleInv_aux[3][0],matrizEleInv_aux[3][1])==true){
                             int matrizEleInv_aux1[][] = ele_invertida.getCuadritosOcupa();
@@ -237,33 +236,120 @@ public class GameActivity extends AppCompatActivity {
 
     public void mueveLeft(View view) {
         Button button_left = view.findViewById(R.id.left_button);
-        int [][] cuadritosOcupa_aux = ele.getCuadritosOcupa();
-        tetris.desocupaCuadritos(cuadritosOcupa_aux[0][0],cuadritosOcupa_aux[0][1],
-                                cuadritosOcupa_aux[1][0],cuadritosOcupa_aux[1][1],
-                                cuadritosOcupa_aux[2][0],cuadritosOcupa_aux[2][1],
-                                cuadritosOcupa_aux[3][0],cuadritosOcupa_aux[3][1]);
-        ele.mueveIzquierda();
-        cuadritosOcupa_aux=ele.getCuadritosOcupa();
-        tetris.ocupaCuadritos(cuadritosOcupa_aux[0][0],cuadritosOcupa_aux[0][1],
-                              cuadritosOcupa_aux[1][0],cuadritosOcupa_aux[1][1],
-                              cuadritosOcupa_aux[2][0],cuadritosOcupa_aux[2][1],
-                              cuadritosOcupa_aux[3][0],cuadritosOcupa_aux[3][1]);
+        switch(randomNum_mueve){
+            case 1:
+                int [][] cuadritosOcupa_aux1 = palito.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux1[0][0],cuadritosOcupa_aux1[0][1], cuadritosOcupa_aux1[1][0],cuadritosOcupa_aux1[1][1], cuadritosOcupa_aux1[2][0],cuadritosOcupa_aux1[2][1], cuadritosOcupa_aux1[3][0],cuadritosOcupa_aux1[3][1]);
+                palito.mueveIzquierda();
+                cuadritosOcupa_aux1=palito.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux1[0][0],cuadritosOcupa_aux1[0][1], cuadritosOcupa_aux1[1][0],cuadritosOcupa_aux1[1][1], cuadritosOcupa_aux1[2][0],cuadritosOcupa_aux1[2][1], cuadritosOcupa_aux1[3][0],cuadritosOcupa_aux1[3][1]);
+                break;
+
+            case 2:
+                int [][] cuadritosOcupa_aux2 = ese_invertida.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux2[0][0],cuadritosOcupa_aux2[0][1], cuadritosOcupa_aux2[1][0],cuadritosOcupa_aux2[1][1], cuadritosOcupa_aux2[2][0],cuadritosOcupa_aux2[2][1], cuadritosOcupa_aux2[3][0],cuadritosOcupa_aux2[3][1]);
+                ese_invertida.mueveIzquierda();
+                cuadritosOcupa_aux2=ese_invertida.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux2[0][0],cuadritosOcupa_aux2[0][1], cuadritosOcupa_aux2[1][0],cuadritosOcupa_aux2[1][1], cuadritosOcupa_aux2[2][0],cuadritosOcupa_aux2[2][1], cuadritosOcupa_aux2[3][0],cuadritosOcupa_aux2[3][1]);
+                break;
+
+            case 3:
+                int [][] cuadritosOcupa_aux3 = ese.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux3[0][0],cuadritosOcupa_aux3[0][1], cuadritosOcupa_aux3[1][0],cuadritosOcupa_aux3[1][1], cuadritosOcupa_aux3[2][0],cuadritosOcupa_aux3[2][1], cuadritosOcupa_aux3[3][0],cuadritosOcupa_aux3[3][1]);
+                ese.mueveIzquierda();
+                cuadritosOcupa_aux3=ese.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux3[0][0],cuadritosOcupa_aux3[0][1], cuadritosOcupa_aux3[1][0],cuadritosOcupa_aux3[1][1], cuadritosOcupa_aux3[2][0],cuadritosOcupa_aux3[2][1], cuadritosOcupa_aux3[3][0],cuadritosOcupa_aux3[3][1]);
+                break;
+            case 4:
+                int [][] cuadritosOcupa_aux4 = cuadrado.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux4[0][0],cuadritosOcupa_aux4[0][1], cuadritosOcupa_aux4[1][0],cuadritosOcupa_aux4[1][1], cuadritosOcupa_aux4[2][0],cuadritosOcupa_aux4[2][1], cuadritosOcupa_aux4[3][0],cuadritosOcupa_aux4[3][1]);
+                cuadrado.mueveIzquierda();
+                cuadritosOcupa_aux4=cuadrado.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux4[0][0],cuadritosOcupa_aux4[0][1], cuadritosOcupa_aux4[1][0],cuadritosOcupa_aux4[1][1], cuadritosOcupa_aux4[2][0],cuadritosOcupa_aux4[2][1], cuadritosOcupa_aux4[3][0],cuadritosOcupa_aux4[3][1]);
+                break;
+
+            case 5:
+                int [][] cuadritosOcupa_aux5 = ele.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux5[0][0],cuadritosOcupa_aux5[0][1], cuadritosOcupa_aux5[1][0],cuadritosOcupa_aux5[1][1], cuadritosOcupa_aux5[2][0],cuadritosOcupa_aux5[2][1], cuadritosOcupa_aux5[3][0],cuadritosOcupa_aux5[3][1]);
+                ele.mueveIzquierda();
+                cuadritosOcupa_aux5=ele.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux5[0][0],cuadritosOcupa_aux5[0][1], cuadritosOcupa_aux5[1][0],cuadritosOcupa_aux5[1][1], cuadritosOcupa_aux5[2][0],cuadritosOcupa_aux5[2][1], cuadritosOcupa_aux5[3][0],cuadritosOcupa_aux5[3][1]);
+                break;
+            case 6:
+                int [][] cuadritosOcupa_aux6 = ele_invertida.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux6[0][0],cuadritosOcupa_aux6[0][1], cuadritosOcupa_aux6[1][0],cuadritosOcupa_aux6[1][1], cuadritosOcupa_aux6[2][0],cuadritosOcupa_aux6[2][1], cuadritosOcupa_aux6[3][0],cuadritosOcupa_aux6[3][1]);
+                ele_invertida.mueveIzquierda();
+                cuadritosOcupa_aux6=ele_invertida.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux6[0][0],cuadritosOcupa_aux6[0][1], cuadritosOcupa_aux6[1][0],cuadritosOcupa_aux6[1][1], cuadritosOcupa_aux6[2][0],cuadritosOcupa_aux6[2][1], cuadritosOcupa_aux6[3][0],cuadritosOcupa_aux6[3][1]);
+                break;
+            case 7:
+                int [][] cuadritosOcupa_aux7 = te.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux7[0][0],cuadritosOcupa_aux7[0][1], cuadritosOcupa_aux7[1][0],cuadritosOcupa_aux7[1][1], cuadritosOcupa_aux7[2][0],cuadritosOcupa_aux7[2][1], cuadritosOcupa_aux7[3][0],cuadritosOcupa_aux7[3][1]);
+                te.mueveIzquierda();
+                cuadritosOcupa_aux7=te.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux7[0][0],cuadritosOcupa_aux7[0][1], cuadritosOcupa_aux7[1][0],cuadritosOcupa_aux7[1][1], cuadritosOcupa_aux7[2][0],cuadritosOcupa_aux7[2][1], cuadritosOcupa_aux7[3][0],cuadritosOcupa_aux7[3][1]);
+                break;
+        }
+
+
     }
 
     public void mueveRight(View view){
         Button button_left = view.findViewById(R.id.right_button);
-        int cuadritosOcupa_aux[][] = ele.getCuadritosOcupa();
+        switch(randomNum_mueve){
+            case 1:
+                int [][] cuadritosOcupa_aux1 = palito.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux1[0][0],cuadritosOcupa_aux1[0][1], cuadritosOcupa_aux1[1][0],cuadritosOcupa_aux1[1][1], cuadritosOcupa_aux1[2][0],cuadritosOcupa_aux1[2][1], cuadritosOcupa_aux1[3][0],cuadritosOcupa_aux1[3][1]);
+                palito.mueveDerecha();
+                cuadritosOcupa_aux1=palito.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux1[0][0],cuadritosOcupa_aux1[0][1], cuadritosOcupa_aux1[1][0],cuadritosOcupa_aux1[1][1], cuadritosOcupa_aux1[2][0],cuadritosOcupa_aux1[2][1], cuadritosOcupa_aux1[3][0],cuadritosOcupa_aux1[3][1]);
+                break;
 
-        tetris.desocupaCuadritos(cuadritosOcupa_aux[0][0],cuadritosOcupa_aux[0][1],
-                cuadritosOcupa_aux[1][0],cuadritosOcupa_aux[1][1],
-                cuadritosOcupa_aux[2][0],cuadritosOcupa_aux[2][1],
-                cuadritosOcupa_aux[3][0],cuadritosOcupa_aux[3][1]);
-        ele.mueveDerecha();
-        cuadritosOcupa_aux = ele.getCuadritosOcupa();
-        tetris.ocupaCuadritos(cuadritosOcupa_aux[0][0],cuadritosOcupa_aux[0][1],
-                cuadritosOcupa_aux[1][0],cuadritosOcupa_aux[1][1],
-                cuadritosOcupa_aux[2][0],cuadritosOcupa_aux[2][1],
-                cuadritosOcupa_aux[3][0],cuadritosOcupa_aux[3][1]);
+            case 2:
+                int [][] cuadritosOcupa_aux2 = ese_invertida.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux2[0][0],cuadritosOcupa_aux2[0][1], cuadritosOcupa_aux2[1][0],cuadritosOcupa_aux2[1][1], cuadritosOcupa_aux2[2][0],cuadritosOcupa_aux2[2][1], cuadritosOcupa_aux2[3][0],cuadritosOcupa_aux2[3][1]);
+                ese_invertida.mueveDerecha();
+                cuadritosOcupa_aux2=ese_invertida.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux2[0][0],cuadritosOcupa_aux2[0][1], cuadritosOcupa_aux2[1][0],cuadritosOcupa_aux2[1][1], cuadritosOcupa_aux2[2][0],cuadritosOcupa_aux2[2][1], cuadritosOcupa_aux2[3][0],cuadritosOcupa_aux2[3][1]);
+                break;
+
+            case 3:
+                int [][] cuadritosOcupa_aux3 = ese.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux3[0][0],cuadritosOcupa_aux3[0][1], cuadritosOcupa_aux3[1][0],cuadritosOcupa_aux3[1][1], cuadritosOcupa_aux3[2][0],cuadritosOcupa_aux3[2][1], cuadritosOcupa_aux3[3][0],cuadritosOcupa_aux3[3][1]);
+                ese.mueveDerecha();
+                cuadritosOcupa_aux3=ese.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux3[0][0],cuadritosOcupa_aux3[0][1], cuadritosOcupa_aux3[1][0],cuadritosOcupa_aux3[1][1], cuadritosOcupa_aux3[2][0],cuadritosOcupa_aux3[2][1], cuadritosOcupa_aux3[3][0],cuadritosOcupa_aux3[3][1]);
+                break;
+            case 4:
+                int [][] cuadritosOcupa_aux4 = cuadrado.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux4[0][0],cuadritosOcupa_aux4[0][1], cuadritosOcupa_aux4[1][0],cuadritosOcupa_aux4[1][1], cuadritosOcupa_aux4[2][0],cuadritosOcupa_aux4[2][1], cuadritosOcupa_aux4[3][0],cuadritosOcupa_aux4[3][1]);
+                cuadrado.mueveDerecha();
+                cuadritosOcupa_aux4=cuadrado.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux4[0][0],cuadritosOcupa_aux4[0][1], cuadritosOcupa_aux4[1][0],cuadritosOcupa_aux4[1][1], cuadritosOcupa_aux4[2][0],cuadritosOcupa_aux4[2][1], cuadritosOcupa_aux4[3][0],cuadritosOcupa_aux4[3][1]);
+                break;
+
+            case 5:
+                int [][] cuadritosOcupa_aux5 = ele.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux5[0][0],cuadritosOcupa_aux5[0][1], cuadritosOcupa_aux5[1][0],cuadritosOcupa_aux5[1][1], cuadritosOcupa_aux5[2][0],cuadritosOcupa_aux5[2][1], cuadritosOcupa_aux5[3][0],cuadritosOcupa_aux5[3][1]);
+                ele.mueveDerecha();
+                cuadritosOcupa_aux5=ele.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux5[0][0],cuadritosOcupa_aux5[0][1], cuadritosOcupa_aux5[1][0],cuadritosOcupa_aux5[1][1], cuadritosOcupa_aux5[2][0],cuadritosOcupa_aux5[2][1], cuadritosOcupa_aux5[3][0],cuadritosOcupa_aux5[3][1]);
+                break;
+            case 6:
+                int [][] cuadritosOcupa_aux6 = ele_invertida.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux6[0][0],cuadritosOcupa_aux6[0][1], cuadritosOcupa_aux6[1][0],cuadritosOcupa_aux6[1][1], cuadritosOcupa_aux6[2][0],cuadritosOcupa_aux6[2][1], cuadritosOcupa_aux6[3][0],cuadritosOcupa_aux6[3][1]);
+                ele_invertida.mueveDerecha();
+                cuadritosOcupa_aux6=ele_invertida.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux6[0][0],cuadritosOcupa_aux6[0][1], cuadritosOcupa_aux6[1][0],cuadritosOcupa_aux6[1][1], cuadritosOcupa_aux6[2][0],cuadritosOcupa_aux6[2][1], cuadritosOcupa_aux6[3][0],cuadritosOcupa_aux6[3][1]);
+                break;
+            case 7:
+                int [][] cuadritosOcupa_aux7 = te.getCuadritosOcupa();
+                tetris.desocupaCuadritos(cuadritosOcupa_aux7[0][0],cuadritosOcupa_aux7[0][1], cuadritosOcupa_aux7[1][0],cuadritosOcupa_aux7[1][1], cuadritosOcupa_aux7[2][0],cuadritosOcupa_aux7[2][1], cuadritosOcupa_aux7[3][0],cuadritosOcupa_aux7[3][1]);
+                te.mueveDerecha();
+                cuadritosOcupa_aux7=te.getCuadritosOcupa();
+                tetris.ocupaCuadritos(cuadritosOcupa_aux7[0][0],cuadritosOcupa_aux7[0][1], cuadritosOcupa_aux7[1][0],cuadritosOcupa_aux7[1][1], cuadritosOcupa_aux7[2][0],cuadritosOcupa_aux7[2][1], cuadritosOcupa_aux7[3][0],cuadritosOcupa_aux7[3][1]);
+                break;
+        }
     }
 
     public void dibujaEnPantalla(int opcion,int fila, int columna){
